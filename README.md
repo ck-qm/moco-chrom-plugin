@@ -123,6 +123,36 @@ moco-chrom-plugin/
 2. In `chrome://extensions/` auf das Aktualisierungs-Symbol klicken
 3. Plugin testen
 
+### Tests
+
+Das Projekt verwendet Jest für automatisierte Tests.
+
+**Wichtig:** Alle Tests verwenden gemockte API-Calls. Es werden keine echten Netzwerk-Anfragen an die MOCO API gestellt und keine echten Credentials benötigt oder verwendet. Alle Test-Daten sind rein fiktiv.
+
+#### Tests ausführen
+
+```bash
+# Alle Tests ausführen
+npm test
+
+# Tests mit Coverage-Report ausführen
+npm run test:coverage
+
+# Tests im Watch-Modus ausführen (nützlich während der Entwicklung)
+npm run test:watch
+```
+
+#### Test-Reports
+
+Nach dem Ausführen der Tests werden folgende Reports generiert:
+
+- **test-report.html**: Ein lesbarer HTML-Report mit allen Testergebnissen
+- **coverage/**: Verzeichnis mit Code-Coverage-Reports (HTML und LCOV)
+
+#### GitHub Actions
+
+Die Tests werden automatisch bei jedem Push und Pull Request über GitHub Actions ausgeführt. Die Test- und Coverage-Reports werden als Artifacts hochgeladen und können in der Actions-Übersicht heruntergeladen werden.
+
 ## Fehlerbehebung
 
 ### "Verbindung fehlgeschlagen"
