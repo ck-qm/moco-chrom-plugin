@@ -1,0 +1,43 @@
+name: Package Chrome Extension
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Create extension package
+        run: |
+          # Create a temporary directory for the extension files
+          mkdir -p extension-package
+          
+          # Copy all necessary files for the extension
+          cp manifest.json extension-package/
+          cp popup.html extension-package/
+          cp options.html extension-package/
+          cp -r icons extension-package/
+          cp -r scripts extension-package/
+          cp -r styles extension-package/
+          
+          # Create the ZIP file
+          cd extension-package
+          zip -r ../moco-chrome-plugin.zip .
+          cd ..
+          
+          # Verify the ZIP was created
+          ls -lh moco-chrome-plugin.zip
+      
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: moco-chrome-plugin
+          path: moco-chrome-plugin.zip
+          if-no-files-found: error
