@@ -22,8 +22,14 @@ class MocoAPI {
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`MOCO API Error: ${response.status} - ${errorText}`);
+        let errorMessage = `HTTP ${response.status}`;
+        try {
+          const errorData = await response.clone().json();
+          errorMessage = errorData.message || errorData.error || errorMessage;
+        } catch {
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(`MOCO API Error: ${errorMessage}`);
       }
 
       return await response.json();
@@ -67,43 +73,45 @@ class MocoAPI {
   async getProjects() {
     return await this.request('/projects');
   }
-
-  // Get tasks for a project
-  async getTasks(projectId) {
-    return await this.request(`/projects/${projectId}/tasks`);
-  }
-
-  // Get all tasks
-  async getAllTasks() {
-    return await this.request('/projects/assigned');
-  }
 }
 
 // Storage helper functions
 const StorageHelper = {
   async getConfig() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       chrome.storage.local.get(['domain', 'apiKey'], (result) => {
-        resolve({
-          domain: result.domain || null,
-          apiKey: result.apiKey || null
-        });
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+        } else {
+          resolve({
+            domain: result.domain || null,
+            apiKey: result.apiKey || null
+          });
+        }
       });
     });
   },
 
   async saveConfig(domain, apiKey) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       chrome.storage.local.set({ domain, apiKey }, () => {
-        resolve();
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+        } else {
+          resolve();
+        }
       });
     });
   },
 
   async clearConfig() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       chrome.storage.local.remove(['domain', 'apiKey'], () => {
-        resolve();
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+        } else {
+          resolve();
+        }
       });
     });
   },

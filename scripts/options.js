@@ -80,8 +80,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       if (result.success) {
         const user = await api.getCurrentUser();
+        const firstName = escapeHtml(user.firstname || '');
+        const lastName = escapeHtml(user.lastname || '');
         showTestResult(
-          `✓ Verbindung erfolgreich! Angemeldet als: ${user.firstname} ${user.lastname}`,
+          `✓ Verbindung erfolgreich! Angemeldet als: ${firstName} ${lastName}`,
           true
         );
       } else {
@@ -94,6 +96,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       testBtn.textContent = 'Verbindung testen';
     }
   });
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
 
   function showTestResult(text, success) {
     testResult.textContent = text;

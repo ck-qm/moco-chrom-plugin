@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function init() {
+  // Set up settings button (only once)
+  const openSettingsBtn = document.getElementById('openSettingsBtn');
+  if (openSettingsBtn && !openSettingsBtn.hasAttribute('data-listener')) {
+    openSettingsBtn.setAttribute('data-listener', 'true');
+    openSettingsBtn.addEventListener('click', () => {
+      chrome.runtime.openOptionsPage();
+    });
+  }
+
   // Check if configured
   const isConfigured = await StorageHelper.isConfigured();
   
@@ -27,25 +36,22 @@ async function init() {
     const user = await api.getCurrentUser();
     currentUserId = user.id;
 
-    // Show main content
-    showMainContent();
-
     // Initialize UI
     await initializeForm();
     await loadTodaysEntries();
+    
+    // Only show main content after successful initialization
+    showMainContent();
     setupEventListeners();
   } catch (error) {
     showError('Fehler beim Laden: ' + error.message);
+    showNotConfigured(); // Revert to config screen
   }
 }
 
 function showNotConfigured() {
   document.getElementById('notConfigured').classList.remove('hidden');
   document.getElementById('mainContent').classList.add('hidden');
-  
-  document.getElementById('openSettingsBtn').addEventListener('click', () => {
-    chrome.runtime.openOptionsPage();
-  });
 }
 
 function showMainContent() {
@@ -130,7 +136,7 @@ async function submitTimeEntry() {
   const hours = parseFloat(document.getElementById('hours').value);
   const note = document.getElementById('note').value;
 
-  if (!projectId || !taskId || !date || !hours) {
+  if (isNaN(projectId) || isNaN(taskId) || !date || isNaN(hours) || hours <= 0) {
     showError('Bitte füllen Sie alle Pflichtfelder aus.');
     return;
   }
@@ -191,15 +197,36 @@ async function loadTodaysEntries() {
       const projectName = activity.project?.name || 'Unbekanntes Projekt';
       const taskName = activity.task?.name || 'Unbekannte Aufgabe';
       
-      entryDiv.innerHTML = `
-        <div class="project">${projectName}</div>
-        <div class="task">${taskName}</div>
-        <div class="details">
-          <span>${hours} Stunden</span>
-          <span>${formatTime(activity.created_at)}</span>
-        </div>
-        ${activity.description ? `<div class="note">${activity.description}</div>` : ''}
-      `;
+      // Build DOM safely to avoid XSS
+      const projectDiv = document.createElement('div');
+      projectDiv.className = 'project';
+      projectDiv.textContent = projectName;
+      entryDiv.appendChild(projectDiv);
+
+      const taskDiv = document.createElement('div');
+      taskDiv.className = 'task';
+      taskDiv.textContent = taskName;
+      entryDiv.appendChild(taskDiv);
+
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'details';
+
+      const hoursSpan = document.createElement('span');
+      hoursSpan.textContent = `${hours} Stunden`;
+      detailsDiv.appendChild(hoursSpan);
+
+      const timeSpan = document.createElement('span');
+      timeSpan.textContent = formatTime(activity.created_at);
+      detailsDiv.appendChild(timeSpan);
+
+      entryDiv.appendChild(detailsDiv);
+
+      if (activity.description) {
+        const noteDiv = document.createElement('div');
+        noteDiv.className = 'note';
+        noteDiv.textContent = activity.description;
+        entryDiv.appendChild(noteDiv);
+      }
       
       entriesList.appendChild(entryDiv);
     });
@@ -215,22 +242,24 @@ function formatTime(isoString) {
   return date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 }
 
-function showError(message) {
+const MESSAGE_TIMEOUT = 4000;
+
+function showError(message, timeout = MESSAGE_TIMEOUT) {
   const errorDiv = document.getElementById('errorMessage');
   errorDiv.textContent = message;
   errorDiv.classList.remove('hidden');
   
   setTimeout(() => {
     errorDiv.classList.add('hidden');
-  }, 5000);
+  }, timeout);
 }
 
-function showSuccess(message) {
+function showSuccess(message, timeout = MESSAGE_TIMEOUT) {
   const successDiv = document.getElementById('successMessage');
   successDiv.textContent = message;
   successDiv.classList.remove('hidden');
   
   setTimeout(() => {
     successDiv.classList.add('hidden');
-  }, 3000);
+  }, timeout);
 }

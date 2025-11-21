@@ -1,14 +1,18 @@
 {
   "manifest_version": 3,
   "name": "MOCO Time Tracker",
-  "version": "1.0.0",
-  "description": "Einfache Zeiterfassung für MOCO",
+  "version": "1.1.0",
+  "description": "Einfache Zeiterfassung für MOCO mit Timer-Funktion",
   "permissions": [
-    "storage"
+    "storage",
+    "alarms"
   ],
   "host_permissions": [
     "https://*.mocoapp.com/*"
   ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -22,5 +26,8 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "options_page": "options.html"
+  "options_page": "options.html",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }
