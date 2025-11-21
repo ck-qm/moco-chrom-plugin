@@ -127,6 +127,8 @@ moco-chrom-plugin/
 
 Das Projekt verwendet Jest für automatisierte Tests.
 
+**Wichtig:** Alle Tests verwenden gemockte API-Calls. Es werden keine echten Netzwerk-Anfragen an die MOCO API gestellt und keine echten Credentials benötigt oder verwendet. Alle Test-Daten sind rein fiktiv.
+
 #### Tests ausführen
 
 ```bash

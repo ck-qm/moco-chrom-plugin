@@ -1,12 +1,23 @@
+/**
+ * Tests for MOCO API integration
+ * 
+ * NOTE: All API calls are fully mocked using jest.fn()
+ * No real network requests are made to the MOCO API
+ * No real credentials are used - all test data is fake
+ */
+
 const { MocoAPI, StorageHelper } = require('../scripts/api.js');
 
 describe('MocoAPI', () => {
   let api;
+  // Mock credentials - these are NOT real credentials and are only used for testing
+  // All API calls are mocked using jest.fn() and no real network requests are made
   const testDomain = 'test-company';
   const testApiKey = 'test-api-key-123';
 
   beforeEach(() => {
     api = new MocoAPI(testDomain, testApiKey);
+    // Mock fetch API to prevent real network requests to MOCO API
     global.fetch = jest.fn();
   });
 
