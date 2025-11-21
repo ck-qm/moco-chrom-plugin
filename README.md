@@ -2,6 +2,12 @@
 
 Eine Chrome-Erweiterung für die einfache Zeiterfassung mit MOCO.
 
+## 📚 Dokumentation
+
+- **[INSTALLATION.md](INSTALLATION.md)** - Schritt-für-Schritt Installationsanleitung
+- **[USAGE.md](USAGE.md)** - Verwendungsanleitung mit Beispielen und Best Practices
+- **README.md** (diese Datei) - Übersicht und technische Details
+
 ## Features
 
 - ⏱️ **Schnelle Zeiterfassung**: Erfassen Sie Ihre Arbeitszeit direkt aus dem Browser
