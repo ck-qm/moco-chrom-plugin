@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOCO Einstellungen</title>
+  <link rel="stylesheet" href="styles/options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>MOCO API Einstellungen</h1>
+    </header>
+
+    <section class="settings-form">
+      <div class="info-box">
+        <h3>🔐 Sicherheitshinweis</h3>
+        <p>
+          Ihre API-Zugangsdaten werden nur lokal in Ihrem Browser gespeichert und niemals an Dritte weitergegeben.
+        </p>
+      </div>
+
+      <form id="settingsForm">
+        <div class="form-group">
+          <label for="domain">
+            MOCO Domain
+            <span class="help-text">z.B.: ihre-firma</span>
+          </label>
+          <div class="domain-input">
+            <span class="domain-prefix">https://</span>
+            <input 
+              type="text" 
+              id="domain" 
+              placeholder="ihre-firma"
+              required
+              pattern="[a-zA-Z0-9-]+"
+            >
+            <span class="domain-suffix">.mocoapp.com</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="apiKey">
+            API Key
+            <span class="help-text">Zu finden unter: Profil → Integrationen</span>
+          </label>
+          <input 
+            type="password" 
+            id="apiKey" 
+            placeholder="Ihr MOCO API Key"
+            required
+          >
+          <button type="button" id="toggleApiKey" class="toggle-btn">👁️ Anzeigen</button>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="primary-btn" id="saveBtn">
+            Speichern
+          </button>
+          <button type="button" class="secondary-btn" id="testBtn">
+            Verbindung testen
+          </button>
+        </div>
+      </form>
+
+      <div id="testResult" class="hidden"></div>
+    </section>
+
+    <section class="info-section">
+      <h2>Wie erhalte ich meinen API Key?</h2>
+      <ol>
+        <li>Melden Sie sich bei MOCO an</li>
+        <li>Gehen Sie zu Ihrem Profil (oben rechts)</li>
+        <li>Wählen Sie "Integrationen"</li>
+        <li>Kopieren Sie Ihren persönlichen API Key</li>
+      </ol>
+      
+      <p class="note">
+        <strong>Hinweis:</strong> Der persönliche API Key gibt Zugriff entsprechend Ihrer persönlichen Berechtigungen.
+      </p>
+    </section>
+
+    <div id="message" class="message hidden"></div>
+  </div>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/options.js"></script>
+</body>
+</html>

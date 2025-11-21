@@ -1,0 +1,266 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #4a90e2;
+}
+
+h1 {
+  font-size: 24px;
+  color: #4a90e2;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #555;
+}
+
+h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.info-box {
+  background: #f0f8ff;
+  border: 1px solid #4a90e2;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.info-box p {
+  line-height: 1.6;
+  color: #555;
+}
+
+.settings-form {
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.help-text {
+  font-size: 12px;
+  color: #999;
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+.domain-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.domain-input:focus-within {
+  border-color: #4a90e2;
+}
+
+.domain-prefix,
+.domain-suffix {
+  padding: 8px 10px;
+  background: #f5f5f5;
+  color: #666;
+  font-size: 14px;
+}
+
+.domain-input input {
+  flex: 1;
+  border: none;
+  padding: 8px 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.toggle-btn:hover {
+  opacity: 1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.primary-btn {
+  flex: 1;
+  padding: 12px 24px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.primary-btn:hover {
+  background: #357abd;
+}
+
+.primary-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.secondary-btn {
+  flex: 1;
+  padding: 12px 24px;
+  background: white;
+  color: #4a90e2;
+  border: 1px solid #4a90e2;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.secondary-btn:hover {
+  background: #f0f8ff;
+}
+
+#testResult {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+#testResult.success {
+  background: #e6ffe6;
+  border: 1px solid #44aa44;
+  color: #008800;
+}
+
+#testResult.error {
+  background: #ffe6e6;
+  border: 1px solid #ff4444;
+  color: #cc0000;
+}
+
+.info-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #eee;
+}
+
+ol {
+  margin-left: 20px;
+  line-height: 2;
+}
+
+.note {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fff8e6;
+  border-left: 3px solid #ffc107;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.message.success {
+  background: #e6ffe6;
+  border: 1px solid #44aa44;
+  color: #008800;
+}
+
+.message.error {
+  background: #ffe6e6;
+  border: 1px solid #ff4444;
+  color: #cc0000;
+}
+
+.hidden {
+  display: none !important;
+}
