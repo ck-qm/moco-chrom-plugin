@@ -21,6 +21,27 @@
     </div>
 
     <div id="mainContent" class="hidden">
+      <!-- Timer Section -->
+      <section id="timerSection" class="timer-section">
+        <div id="timerRunning" class="hidden">
+          <div class="timer-header">
+            <span class="timer-icon">▶️</span>
+            <div class="timer-info">
+              <div class="timer-project" id="timerProject">Projekt läuft...</div>
+              <div class="timer-task" id="timerTask">Aufgabe</div>
+            </div>
+          </div>
+          <div class="timer-display">
+            <span id="timerElapsed">00:00</span>
+          </div>
+          <button id="stopTimerBtn" class="stop-btn">⏹ Timer stoppen</button>
+        </div>
+        
+        <div id="timerStopped">
+          <button id="startTimerBtn" class="start-btn hidden">▶ Timer starten</button>
+        </div>
+      </section>
+
       <section class="quick-entry">
         <h2>Neue Zeiterfassung</h2>
         <form id="timeEntryForm">

@@ -69,6 +69,14 @@ class MocoAPI {
     });
   }
 
+  // Update an existing activity
+  async updateActivity(activityId, activityData) {
+    return await this.request(`/activities/${activityId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ activity: activityData })
+    });
+  }
+
   // Get projects
   async getProjects() {
     return await this.request('/projects');
