@@ -134,7 +134,7 @@ describe('Popup Utility Functions', () => {
       expect(isoDate).toBe('2024-01-15');
     });
 
-    test('should get today\'s date', () => {
+    test("should get today's date", () => {
       const today = new Date().toISOString().split('T')[0];
       
       expect(today).toMatch(/^\d{4}-\d{2}-\d{2}$/);

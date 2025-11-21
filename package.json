@@ -1,5 +1,5 @@
 {
-  "name": "moco-chrom-plugin",
+  "name": "moco-chrome-plugin",
   "version": "1.1.0",
   "description": "Chrome extension for MOCO time tracking",
   "scripts": {
