@@ -1,5 +1,8 @@
 // Background service worker for MOCO Time Tracker
 
+// Constants
+const QUARTER_HOUR_MULTIPLIER = 4; // For rounding to 0.25 hour increments
+
 // Timer state
 let timerState = {
   isRunning: false,
@@ -70,7 +73,7 @@ async function stopTimer() {
   }
   
   const elapsedMs = Date.now() - timerState.startTime;
-  const elapsedHours = Math.round((elapsedMs / (1000 * 60 * 60)) * 4) / 4; // Round to nearest 0.25
+  const elapsedHours = Math.round((elapsedMs / (1000 * 60 * 60)) * QUARTER_HOUR_MULTIPLIER) / QUARTER_HOUR_MULTIPLIER;
   
   const result = {
     projectId: timerState.projectId,

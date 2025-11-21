@@ -58,7 +58,7 @@ Die MOCO Time Tracker Chrome-Erweiterung ermöglicht schnelle und einfache Zeite
 1. "⏹ Timer stoppen" klicken
 2. Zeit wird automatisch gerundet (auf 0,25h)
 3. Eintrag wird in MOCO erstellt
-4. Erfolgsm eldung wird angezeigt
+4. Erfolgsmeldung wird angezeigt
 
 ```
 Beispiel:

@@ -69,7 +69,12 @@ class MocoAPI {
     });
   }
 
-  // Update an existing activity
+  /**
+   * Update an existing activity
+   * @param {number} activityId - The ID of the activity to update
+   * @param {object} activityData - Activity data to update (e.g., { hours: 2.5 })
+   * @returns {Promise<object>} Updated activity object
+   */
   async updateActivity(activityId, activityData) {
     return await this.request(`/activities/${activityId}`, {
       method: 'PUT',

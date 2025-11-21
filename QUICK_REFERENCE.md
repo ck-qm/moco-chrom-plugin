@@ -115,7 +115,7 @@ Bei Erfolg: "Speichern"
 <tr><td>1. Stop</td><td>"⏹ Timer stoppen" klicken</td></tr>
 <tr><td>2. Auto</td><td>Zeit wird gerundet (0,25h)</td></tr>
 <tr><td>3. Auto</td><td>Eintrag wird erstellt</td></tr>
-<tr><td>4. Info</td><td>Erfolgsmel dung erscheint</td></tr>
+<tr><td>4. Info</td><td>Erfolgsmeldung erscheint</td></tr>
 </table>
 
 **Ergebnis:**
