@@ -20,6 +20,7 @@ node_modules/
 dist/
 build/
 
-# Test files
-test/
-*.test.js
+# Test coverage and reports
+coverage/
+test-report.html
+.nyc_output/
