@@ -59,7 +59,7 @@ class MocoAPI {
   async createActivity(activityData) {
     return await this.request('/activities', {
       method: 'POST',
-      body: JSON.stringify(activityData)
+      body: JSON.stringify({ activity: activityData })
     });
   }
 
