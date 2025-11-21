@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOCO Time Tracker</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>MOCO Zeiterfassung</h1>
+      <button id="settingsBtn" class="icon-btn" title="Einstellungen">⚙️</button>
+    </header>
+
+    <div id="notConfigured" class="hidden">
+      <p class="info-message">
+        Bitte konfigurieren Sie zuerst Ihre MOCO API-Zugangsdaten in den Einstellungen.
+      </p>
+      <button id="openSettingsBtn" class="primary-btn">Einstellungen öffnen</button>
+    </div>
+
+    <div id="mainContent" class="hidden">
+      <section class="quick-entry">
+        <h2>Neue Zeiterfassung</h2>
+        <form id="timeEntryForm">
+          <div class="form-group">
+            <label for="project">Projekt</label>
+            <select id="project" required>
+              <option value="">Projekt auswählen...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="task">Aufgabe</label>
+            <select id="task" required>
+              <option value="">Aufgabe auswählen...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Datum</label>
+            <input type="date" id="date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="hours">Stunden</label>
+            <input type="number" id="hours" min="0" max="24" step="0.25" value="1" required>
+          </div>
+
+          <div class="form-group">
+            <label for="note">Notiz</label>
+            <textarea id="note" rows="3" placeholder="Beschreibung der Tätigkeit..."></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn" id="submitBtn">
+            Zeiterfassung erstellen
+          </button>
+        </form>
+      </section>
+
+      <section class="recent-entries">
+        <h2>Letzte Einträge (heute)</h2>
+        <div id="entriesList" class="entries-list">
+          <p class="loading">Lade Einträge...</p>
+        </div>
+        <button id="refreshBtn" class="secondary-btn">Aktualisieren</button>
+      </section>
+    </div>
+
+    <div id="errorMessage" class="error-message hidden"></div>
+    <div id="successMessage" class="success-message hidden"></div>
+  </div>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/popup.js"></script>
+</body>
+</html>
